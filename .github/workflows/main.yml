@@ -24,6 +24,6 @@ jobs:
           context: .
           push: true
           tags: |
-            Victor-Silva01/CI-PIpelene
+            Victor-Silva01/CI-PIpelene:V1
             Victor-Silva01/CI-PIpelene:latest
             
