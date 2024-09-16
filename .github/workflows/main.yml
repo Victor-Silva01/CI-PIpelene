@@ -1,29 +1,36 @@
-name: CI-PIPelene
+name: CI/CD Pipeline
 
 on:
   push:
-    branches: [main]
-    
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  CI:
+  build:
     runs-on: ubuntu-latest
     
     steps:
-    
-      - uses: actions/checkout@v3
-    
-      - name: Docker Login
-        uses: docker/login-action@v3.3.0
-        with:
-          username: ${{ secrets.USER }}  
-          password: ${{ secrets.PASSWD }}
-          
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v6.7.0
-        with:
-          context: .
-          push: true
-          tags: |
-            Victor-Silva01/CI-PIpelene:V1
-            Victor-Silva01/CI-PIpelene:latest
-            
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test
+
+    - name: Build application
+      run: npm run build
+
+    - name: Deploy
+      run: |
+        echo "Deploying application..."
+        # Adicione seus comandos de deploy aqui
