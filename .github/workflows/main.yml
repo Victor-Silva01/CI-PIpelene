@@ -15,22 +15,28 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+    
+    - name: List directory contents
+      run: ls -la
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '16'
-
+    
     - name: Install dependencies
       run: npm install
-
+    
     - name: Run tests
       run: npm test
-
+    
     - name: Build application
       run: npm run build
-
+    
     - name: Deploy
       run: |
         echo "Deploying application..."
         # Adicione seus comandos de deploy aqui
+        # Por exemplo, você pode usar o rsync, scp, ou algum CLI específico do serviço de deploy
+        # Exemplo:
+        # scp -r ./build user@server:/path/to/deploy
